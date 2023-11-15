@@ -1,0 +1,54 @@
+void display(int *a,int n)
+{                                                                                                                                                                  
+        int i;
+        printf("sorted array:\n");
+        for(i=0;i<n;i++)
+        {                                                                                                                                                          
+                printf("\t%d\n",a[i]);
+        }                                                                                                                                                          
+}                                                                                                                                                                  
+void valuesorting(int *a,int n)
+{                                                                                                                                                                  
+        int temp;
+        for(int i=0;i<n-1;i++)
+        {                                                                                                                                                          
+                for(int j=0;j<n-i-1;j++)
+                {                                                                                                                                                  
+                        if(*(a+j)>*(a+j+1))
+                        {                                                                                                                                          
+                                int t=*(a+j);
+                                *(a+j)=valueswapping(*(a+j),*(a+j+1));
+                                *(a+j+1)=valueswapping(*(a+j+1),t);
+                        }                                                                                                                                          
+                }                                                                                                                                                  
+        }                                                                                                                                                          
+}                                                                                                                                                                  
+int valueswapping(int a,int b)
+{                                                                                                                                                                  
+        int temp;                                                                                                                                                  
+        temp=a;                                                                                                                                                    
+        a=b;                                                                                                                                                       
+        b=temp;                                                                                                                                                    
+        return a;                                                                                                                                                  
+}                                                                                                                                                                  
+void refswapping(int *a,int *b)                                                                                                                                    
+{                                                                                                                                                                  
+        int temp=*a;                                             {                                                                                                  
+        *a=*b;                                                                                                                                                     
+        *b=temp;                                                                                                                                                   
+}                                                                                                                                                                  
+void refsorting(int *a,int n)   
+{
+int temp;
+        for(int i=0;i<n-1;i++)
+        {                                                                                                                                                          
+                for(int j=0;j<n-i-1;j++)
+                {                                                                                                                                                  
+                        if(*(a+j)>*(a+j+1))
+                        {                                                                                                                                          
+                                refswapping(&a[j],&a[j+1]);
+                                                                                                                                                                   
+                        }                                                                                                                                          
+                }                                                                                                                                                  
+        }                                                                                                                                                          
+}       

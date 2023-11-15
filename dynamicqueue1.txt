@@ -1,0 +1,8 @@
+struct queue *q,*q1;
+struct queue *createqueue(struct queue *q);
+void enqueue(struct queue *q,int a);
+int dequeue(struct queue *q);
+int peep(struct queue *q);
+void isFull(struct queue *q);
+int isEmpty(struct queue *q);
+void display(struct queue *q);

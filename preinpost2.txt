@@ -1,0 +1,174 @@
+int arr[100],a=0;
+struct tree {
+        int data;
+        struct tree *lc,*rc;
+};                                                                                                                                                                 
+struct tree *insertion(struct tree *r,int a)
+{                                                                                                                                                                  
+        struct tree *node=(struct tree *)malloc(sizeof(struct tree));
+        if(node==NULL)
+        {                                                                                                                                                          
+                printf("Unsuccessful allocation");
+                exit(1);
+        }                                                                                                                                                          
+        node->data=a;                                                                                                                                              
+        node->lc=node->rc=NULL;
+        if(r==NULL)
+        {                                                                                                                                                          
+                r=node;                                                                                                                                            
+                return r;
+        }                                                                                                                                                          
+        else
+        {                                                                                                                                                          
+                if(r->data>a)
+                        r->lc=insertion(r->lc,a);                                                                                                                  
+                else if(r->data<a)
+                        r->rc=insertion(r->rc,a);                                                                                                                  
+                return r;
+        }                                                                                                                                                          
+}                                                                                                                                                                  
+int height(struct tree *r){
+        if(r==NULL)
+                return 0;
+        else
+        {                                                                                                                                                          
+                                                                                                                                                                   
+                int lheight=height(r->lc);
+                int rheight=height(r->rc);
+                if(lheight>rheight)
+                        return (lheight+1);
+                else
+return (rheight+1);
+        }                                                                                                                                                          
+}
+void push(int e)
+{
+        arr[a]=e;                                                                                                                                                  
+        a++;                                                                                                                                                       
+}
+void currentLevel(struct tree *r,int level)
+{
+        if(r==NULL)
+        {                                                                                                                                                          
+                push(0);
+                return;
+        }                                                                                                                                                          
+        else if(level==1)
+                push(r->data);                                                                                                                                     
+        else if(level>1)
+        {                                                                                                                                                          
+                currentLevel(r->lc,level-1);
+                currentLevel(r->rc,level-1);
+        }                                                                                                                                                          
+}
+int levelorder(struct tree *r)
+{                                                                                                                                                                  
+        if(r==NULL)
+        {                                                                                                                                                          
+                printf("Empty");
+                return '\0';
+        }                                                                                                                                                          
+        int h=height(r);
+        int i;
+        for(int i=1;i<=h;i++)
+        currentLevel(r,i);                                                                                                                                         
+        return h;
+}                                                                                                                                                                  
+int power(int e)
+{                                                                                                                                                                  
+        int y=1;
+for(int x=1;x<=e;x++)
+                y*=2;
+        return y;
+}
+int search(struct tree *r,int a)
+{
+        if(r==NULL)
+        {                                                                                                                                                          
+                return 0;
+        }                                                                                                                                                          
+        else if(r->data==a)
+                return 1;
+        else if(r->data<a)
+                search(r->rc,a);                                                                                                                                   
+        else
+                search(r->lc,a);                                                                                                                                   
+}
+struct tree *deletion(struct tree *r,int a)
+{                                                                                                                                                                  
+        if(r==NULL)
+                return r;
+        else if(a<r->data)
+                r->lc=deletion(r->lc,a);                                                                                                                           
+        else if(a>r->data)
+                r->rc=deletion(r->rc,a);                                                                                                                           
+        else
+        {                                                                                                                                                          
+                struct tree *t;
+                if(r->lc==NULL&&r->rc==NULL)
+                {                                                                                                                                                  
+                        free(r);                                                                                                                                   
+                        return NULL;
+                }                                                                                                                                                  
+                else if(r->lc==NULL)
+                {                                                                                                                                                  
+                        t=r->rc;                                                                                                                                   
+                        free(r);                                                                                                                                   
+                        return t;
+                }  
+ else if(r->rc==NULL)
+                {                                                                                                                                                  
+                        t=r->lc;                                                                                                                                   
+                        free(r);                                                                                                                                   
+                        return t;
+                }                                                                                                                                                  
+                else{
+                                                                                                                                                                   
+                        struct tree *curr=r->rc,*p;
+                        p=r;                                                                                                                                       
+                        while(curr->lc!=NULL)
+                        {                                                                                                                                          
+                                p=curr;                                                                                                                            
+                                curr=curr->lc;                                                                                                                     
+                        }                                                                                                                                          
+                        r->data=curr->data;                                                                                                                        
+                        if(p!=r)
+                                p->lc=curr->rc;                                                                                                                    
+                        else
+                                p->rc=curr->rc;                                                                                                                    
+                        r->data=curr->data;                                                                                                                        
+                        free(curr);                                                                                                                                
+                        return r;
+                                                                                                                                                                   
+                                                                                                                                                                   
+                }                                                                                                                                                  
+        }                                                                                                                                                          
+        return r;
+}                                                                                                                                                                  
+void inorder(struct tree *r)
+{                                                                                                                                                                  
+        if(r!=NULL)
+        {                                                                                                                                                          
+                inorder(r->lc);                                                                                                                                    
+                printf("%d ",r->data);
+                inorder(r->rc);                                                                                                                                    
+        }                                                                                                                                                          
+}      
+void postorder(struct tree *r)
+{
+        if(r!=NULL)
+        {                                                                                                                                                          
+                postorder(r->lc);                                                                                                                                  
+                postorder(r->rc);                                                                                                                                  
+                printf("%d ",r->data);
+        }                                                                                                                                                          
+}
+void preorder(struct tree *r)
+{
+        if(r!=NULL)
+        {                                                                                                                                                          
+                printf("%d ",r->data);
+                preorder(r->lc);                                                                                                                                   
+                preorder(r->rc);                                                                                                                                   
+        }                                                                                                                                                          
+}

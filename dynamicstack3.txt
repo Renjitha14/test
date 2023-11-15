@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "dynamicstack.h"
+#include "dynamicstack.c"
+void main()
+{                                                                                                                                                                  
+        int c=0,i;
+        struct stack *s;
+        s=createstack(s);                                                                                                                                          
+        while(c!=6)
+        {                                                                                                                                                          
+                printf("Enter 1 for push\n2 for pop\n3 for peep\n4 to check whether the stack is empty\n5 to quit:");
+                scanf("%d",&c);
+                switch(c)
+                {                                                                                                                                                  
+                        case 1:
+                                printf("enter element to be pushed:");
+                                scanf("%d",&i);
+                                push(s,i);                                                                                                                         
+                                printf("Push Function:\n");
+                                display(s);                                                                                                                        
+                                break;
+                        case 2:
+                                printf("Pop Function:\n");
+                                pop(s);                                                                                                                            
+                                display(s);                                                                                                                        
+                                break;
+                        case 3:
+                                printf("Peep Function: %d\n",peek(s));
+                                break;
+                        case 4:
+                                if(isEmpty(s))
+                                        printf("Stack is empty\n");
+                                else
+                                        printf("Stack is non-empty\n");
+                                                                                                                                                                   
+                                break;
+                        case 5:
+                                exit(1);
+                }                                                

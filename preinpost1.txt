@@ -1,0 +1,13 @@
+struct tree *r;
+struct tree *insertion(struct tree *r,int a);
+struct tree *deletion(struct tree *r,int a);
+int height(struct tree *r);
+void push(int e);
+int power(int e);
+void currentLevel(struct tree *r,int level);
+int levelorder(struct tree *r);
+int search(struct tree *r,int a);
+void inorder(struct tree *r);
+void preorder(struct tree *r);
+void postorder(struct tree *r);
+~                              

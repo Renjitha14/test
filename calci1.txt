@@ -1,0 +1,7 @@
+struct complex_no *c;
+void get_data(struct complex_no *c);
+void display_data(struct complex_no *c);
+void add(struct complex_no *c1,struct complex_no *c2,struct complex_no *c3);
+void sub(struct complex_no *c1,struct complex_no *c2,struct complex_no *c3);
+void prod(struct complex_no *c1,struct complex_no *c2,struct complex_no *c3);
+float absolute(struct complex_no *c);

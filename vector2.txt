@@ -1,0 +1,38 @@
+struct Vector* createVector(int initialSize) {
+        struct Vector* vec = (struct Vector*)malloc(sizeof(struct Vector));
+        if (vec == NULL) {
+                return NULL;
+        }                                                                                                                                                          
+        vec->data = (int*)malloc(initialSize * sizeof(int));
+        if (vec->data == NULL) {
+                free(vec);                                                                                                                                         
+                return NULL;
+        }                                                                                                                                                          
+        vec->size = 0;
+        return vec;
+}                                                                                                                                                                  
+                                                                                                                                                                   
+void pushBack(struct Vector* vec, int element) {
+        if (vec->size >= 0) {
+                vec->data[vec->size] = element;                                                                                                                    
+                vec->size++;                                                                                                                                       
+        }                                                                                                                                                          
+}                                                                                                                                                                  
+                                                                                                                                                                   
+int getElement(const struct Vector* vec, int index) {
+        if (index >= 0 && index < vec->size) {
+                return vec->data[index];
+        } else {
+                return -1;
+        }                                                                                                                                                          
+}                                                                                                                                                                  
+int getSize(const struct Vector* vec) {
+        return vec->size;
+}                                                                                                                                                                  
+                                                                                                                                                                   
+void destroyVector(struct Vector* vec) {
+        if (vec != NULL) {
+                free(vec->data);                                                                                                                                   
+                free(vec);                                                                                                                                         
+        }   
+}

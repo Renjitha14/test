@@ -1,0 +1,49 @@
+#include<stdio.h>
+#include<math.h>
+#include "complexcalculator.h"
+#include "complexcalculator.c"
+int main()
+{                                                                                                                                                                  
+        char s;
+        printf("enter + for addition,- for subtraction,* for multiplication,'a' for absolute value:");
+        scanf("%c",&s);
+        if(s=='a')
+        {                                                                                                                                                          
+                struct complex_no *c,n;
+                c=&n;                                                                                                                                              
+                printf("enter the input\n");
+                get_data(c);                                                                                                                                       
+                printf("Absolute value:%f",absolute(c));
+        }                                                                                                                                                          
+        else
+        {                                                                                                                                                          
+                struct complex_no *c1,*c2,*c3,n1,n2,n3;
+                c1=&n1;                                                                                                                                            
+                c2=&n2;                                                                                                                                            
+                c3=&n3;                                                                                                                                            
+                printf("enter the input\n");
+                get_data(c1);                                                                                                                                      
+                get_data(c2);                                                                                                                                      
+                switch(s)
+                {                                                                                                                                                  
+                        case '+':
+                                add(c1,c2,c3);                                                                                                                     
+                                display_data(c3);                                                                                                                  
+                                break;
+                        case '-':
+                                sub(c1,c2,c3);                                                                                                                     
+                                display_data(c3);                                                                                                                  
+                                break;
+                        case '*':
+                                prod(c1,c2,c3);                                                                                                                    
+                                display_data(c3);    
+break;
+                        default:
+                                printf("Invalid choice");
+                                                                                                                                                                   
+                }                                                                                                                                                  
+                                                                                                                                                                   
+        }                                                                                                                                                          
+        printf("\n");
+        return 1;
+}                      

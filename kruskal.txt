@@ -1,0 +1,75 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define V 100
+#define E 100
+struct Edge{
+        int src,dest,weight;
+};                                                                                                                                                                 
+struct vertexset{
+        int rank,parent;
+};                                                                                                                                                                 
+struct Edge edges[E];
+struct vertexset set[V];
+int comparison(const void *a,const void *b)
+{                                                                                                                                                                  
+        return ((struct Edge*)a)->weight-((struct Edge *)b)->weight;
+}                                                                                                                                                                  
+int search(int i)
+{                                                                                                                                                                  
+        if(set[i].parent!=i)
+                set[i].parent=search(set[i].parent);                                                                                                               
+        return set[i].parent;
+}                                                                                                                                                                  
+void union_of_sets(int x,int y)
+{                                                                                                                                                                  
+        int xr=search(x);
+        int yr=search(y);
+        if(set[xr].rank<set[yr].rank)
+                set[xr].parent=yr;                                                                                                                                 
+        else if(set[xr].rank>set[yr].rank)
+                set[yr].parent=xr;                                                                                                                                 
+        else
+        {                                                                                                                                                          
+                set[yr].parent=xr;                                                                                                                                 
+                set[xr].rank++;                                                                                                                                    
+        }                                                                                                                                                          
+                                                                                                                                                                   
+}                                                                                                                                                                  
+void kruskals(int numV,int numE)
+{                                                                                                                                                                  
+        struct Edge ans[numV];
+int e=0,i=0;
+        qsort(edges,numE,sizeof(struct Edge),comparison);
+        for(int i=0;i<numV;i++)
+        {                                                                                                                                                          
+                set[i].parent=i;                                                                                                                                   
+                set[i].rank=0;
+        }                                                                                                                                                          
+        while(e<numV-1&&i<numE)
+        {                                                                                                                                                          
+                struct Edge nextEdge=edges[i++];
+                int x=search(nextEdge.src);
+                int y=search(nextEdge.dest);
+                if(x!=y)
+                {                                                                                                                                                  
+                        ans[e++]=nextEdge;                                                                                                                         
+                        union_of_sets(x,y);                                                                                                                        
+                }                                                                                                                                                  
+        }                                                                                                                                                          
+        printf("Minimum spanning tree using kruskal's algorithm:\n");
+        printf("Edge \tWeight\n");
+        for(int i=0;i<e;i++)
+                printf("%d-%d\t%d\n",ans[i].src,ans[i].dest,ans[i].weight);
+}
+void main()
+{                                                                                                                                                                  
+        int numvertices,numedges;
+        printf("Enter the no of vertices:");
+        scanf("%d",&numvertices);
+        printf("Enter the no of edges:");
+        scanf("%d",&numedges);
+        printf("Enter the edges(format:source_vertex  destination_vertex  weight):\n");
+        for(int i=0;i<numedges;i++)
+                scanf("%d %d %d",&edges[i].src,&edges[i].dest,&edges[i].weight);
+        kruskals(numvertices,numedges);                                                                                                                            
+}    

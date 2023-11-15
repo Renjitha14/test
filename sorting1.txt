@@ -1,0 +1,5 @@
+void refswapping(int *a,int *b);
+int valueswapping(int a,int b);
+void display(int *a,int n);
+void refsorting(int *a,int n);
+void valuesorting(int *a,int n);

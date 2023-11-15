@@ -1,0 +1,140 @@
+#include<stdio.h>
+#include<stdlib.h>
+int a=0;
+int arr[100];
+struct tree {
+        int data;
+        struct tree *lc,*rc;
+};                                                                                                                                                                 
+int search(int arr[],int start,int end,int value);
+struct tree *newNode(int value);
+int height(struct tree *r);
+void push(int e);
+int power(int e);
+void currentLevel(struct tree *r,int level);
+int levelorder(struct tree *r);
+struct tree *BuildTree(int in[],int pre[],int start,int end)
+{
+        static int preindex=0;
+        if(start>end)
+                return NULL;
+        struct tree *r=newNode(pre[preindex++]);
+        if(start==end)
+                return r;
+        int index=search(in,start,end,r->data);
+        r->lc=BuildTree(in,pre,start,index-1);
+        r->rc=BuildTree(in,pre,index+1,end);
+        return r;
+}
+int search(int arr[],int start,int end,int value)
+{
+        int i;
+        for(i=start;i<=end;i++)
+        {                                                                                                                                                          
+                if(arr[i]==value)
+                        return i;
+        }                                                                                                                                                          
+}
+struct tree *newNode(int value)
+{
+        struct tree *node=(struct tree *)malloc(sizeof(struct tree));
+if(node==NULL)
+        {                                                                                                                                                          
+                printf("Unsuccessful allocation\n");
+                exit(1);
+        }                                                                                                                                                          
+        node->data=value;                                                                                                                                          
+        node->lc=node->rc=NULL;
+        return node;
+}
+int height(struct tree *r){
+        if(r==NULL)
+                return 0;
+        else
+        {                                                                                                                                                          
+                                                                                                                                                                   
+                int lheight=height(r->lc);
+                int rheight=height(r->rc);
+                if(lheight>rheight)
+                        return (lheight+1);
+                else
+                        return (rheight+1);
+        }                                                                                                                                                          
+}
+void push(int e)
+{
+        arr[a]=e;                                                                                                                                                  
+        a++;                                                                                                                                                       
+}
+void currentLevel(struct tree *r,int level)
+{                                                                                                                                                                  
+        if(r==NULL && level>1)
+                push(0);
+        if(r==NULL)
+        {                                                                                                                                                          
+                push(0);
+                return;
+        }                                                                                                                                                          
+         if(level==1)
+                push(r->data);
+else if(level>1)
+        {                                                                                                                                                          
+                currentLevel(r->lc,level-1);
+                currentLevel(r->rc,level-1);
+        }                                                                                                                                                          
+}
+int levelorder(struct tree *r)
+{
+        if(r==NULL)
+        {                                                                                                                                                          
+                printf("Empty");
+                return '\0';
+        }                                                                                                                                                          
+        int h=height(r);
+        int i;
+        for(int i=1;i<=h;i++)
+                currentLevel(r,i);                                                                                                                                 
+        return h;
+}
+int power(int e)
+{
+        int y=1;
+        for(int x=1;x<=e;x++)
+                y*=2;
+        return y;
+}
+void main()
+{                                                                                                                                                                  
+        int n,i,j,k,m,h,l;
+        printf("Enter the no of elements:");
+        scanf("%d",&n);
+        int pre[n],in[n];
+        printf("Enter inorder elements:");
+        for(i=0;i<n;i++)
+                scanf("%d",&in[i]);
+        printf("Enter preorder elements:");
+        for(i=0;i<n;i++)
+                scanf("%d",&pre[i]);
+        struct tree *root=BuildTree(in,pre,0,n-1);
+h=levelorder(root);                                                                                                                                        
+        m=h;                                                                                                                                                       
+        a=0;
+        for(l=1;l<=h;l++)
+        {                                                                                                                                                          
+                for(j=power(l-1);j<=power(l)-1;j++){
+                        if(j==power(l-1)){
+                                for(k=power(m);k>=1;k--)
+                                        printf(" ");
+                        }                                                                                                                                          
+                        if(arr[j-1]==0)
+                                printf(" ");
+                        else
+                                printf("%d",arr[j-1]);
+                        for(k=power(m+1);k>=1;k--)
+                                printf(" ");
+                }                                                                                                                                                  
+                m-=1;
+                printf("\n");
+        }                                                                                                                                                          
+                                                                                                                                                                   
+}

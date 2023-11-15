@@ -1,0 +1,85 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#define MAX_VERTICES 100
+struct Queue {
+        int items[MAX_VERTICES];
+        int front;
+        int rear;
+};                                                                                                                                                                 
+struct Queue* createQueue() {
+        struct Queue* queue = (struct Queue*)malloc(sizeof(struct Queue));
+        queue->front = -1;
+        queue->rear = -1;
+        return queue;
+}                                                                                                                                                                  
+bool isEmpty(struct Queue* queue) {
+        return queue->front == -1;
+}                                                                                                                                                                  
+void enqueue(struct Queue* queue, int value) {
+        if (queue->rear == MAX_VERTICES - 1) {
+                printf("Queue is full\n");                                                                                                                         
+        } else {                                                                                                                                                   
+                if (queue->front == -1) {                                                                                                                          
+                        queue->front = 0;
+                }                                                                                                                                                  
+                queue->rear++;                                                                                                                                     
+                queue->items[queue->rear] = value;                                                                                                                 
+        }                                                                                                                                                          
+}                                                                                                                                                                  
+int dequeue(struct Queue* queue) {
+        int item;                                                                                                                                                  
+        if (isEmpty(queue)) {                                                                                                                                      
+                printf("Queue is empty\n");                                                                                                                        
+                item = -1;                                                                                                                                         
+        } else {                                                                                                                                                   
+                item = queue->items[queue->front];                                                                                                                 
+                queue->front++;                                                                                                                                    
+                if (queue->front > queue->rear) {                                                                                                                  
+                        queue->front = queue->rear = -1;
+                } 
+}                                                                                                                                                          
+        return item;
+}
+void bfs(int adjacencyMatrix[MAX_VERTICES][MAX_VERTICES], int vertices, int startVertex) {
+        struct Queue* queue = createQueue();
+        bool visited[MAX_VERTICES] = {false};
+                                                                                                                                                                   
+        printf("Breadth-First Search (BFS) starting from vertex %d: ", startVertex);
+                                                                                                                                                                   
+        printf("%d -> ", startVertex);
+        visited[startVertex] = true;
+        enqueue(queue, startVertex);                                                                                                                               
+                                                                                                                                                                   
+        while (!isEmpty(queue)) {
+                int currentVertex = dequeue(queue);
+                                                                                                                                                                   
+                for (int i = 0; i < vertices; i++) {
+                        if (adjacencyMatrix[currentVertex][i] == 1 && !visited[i]) {
+                                printf("%d -> ", i);
+                                visited[i] = true;
+                                enqueue(queue, i);                                                                                                                 
+                        }                                                                                                                                          
+                }                                                                                                                                                  
+        }                                                                                                                                                          
+                                                                                                                                                                   
+        printf("Done\n");
+}
+void main() {
+        int vertices, startVertex;
+        printf("Enter the number of vertices: ");
+        scanf("%d", &vertices);
+                                                                                                                                                                   
+        int adjacencyMatrix[MAX_VERTICES][MAX_VERTICES];
+        printf("Enter the adjacency matrix:\n");
+        for (int i = 0; i < vertices; i++) {
+                for (int j = 0; j < vertices; j++) {
+                        printf("Enter the adjacency list of vertex %d:",i);
+                        scanf("%d", &adjacencyMatrix[i][j]);
+                }  
+}                                                                                                                                                          
+        printf("Enter the starting vertex: ");
+        scanf("%d", &startVertex);
+        bfs(adjacencyMatrix, vertices, startVertex);                                                                                                               
+                                                                                                                                                                   
+}

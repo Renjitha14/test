@@ -1,0 +1,7 @@
+struct tree *r;                                                                                                                                                    
+struct tree *insertion(struct tree *r,int a);
+struct tree *deletion(struct tree *r,int a);
+int search(struct tree *r,int a);
+void inorder(struct tree *r);
+void preorder(struct tree *r);
+void postorder(struct tree *r);

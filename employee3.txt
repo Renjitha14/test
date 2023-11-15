@@ -1,0 +1,11 @@
+#include<stdio.h>
+#include "employee.h"
+#include "employee.c"
+void main()
+{                                                                                                                                                                  
+        struct employee e1,*ptr;
+        ptr=&e1;                                                                                                                                                   
+        get_data(ptr);                                                                                                                                             
+        display_data(ptr);                                                                                                                                         
+}                                                                                                                                                                  
+  

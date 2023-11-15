@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include <stdbool.h>
+                                                                                                                                                                   
+#define MAX_VERTICES 100
+                                                                                                                                                                   
+int adjacencyMatrix[MAX_VERTICES][MAX_VERTICES];
+bool visited[MAX_VERTICES];
+void dfs(int vertices, int startVertex) {
+        visited[startVertex] = true;
+        printf("%d -> ", startVertex);
+                                                                                                                                                                   
+        for (int i = 0; i < vertices; i++) {
+                if (adjacencyMatrix[startVertex][i] == 1 && !visited[i]) {
+                        dfs(vertices, i);                                                                                                                          
+                }                                                                                                                                                  
+        }                                                                                                                                                          
+}                                                                                                                                                                  
+                                                                                                                                                                   
+void main(){
+        int vertices, startVertex;
+        printf("Enter the number of vertices: ");
+        scanf("%d", &vertices);
+                                                                                                                                                                   
+        printf("Enter the adjacency matrix:\n");
+        for (int i = 0; i < vertices; i++) {
+                for (int j = 0; j < vertices; j++) {
+                        printf("Enter adjacency list of vertex %d:",i);
+                        scanf("%d", &adjacencyMatrix[i][j]);
+                }                                                                                                                                                  
+        }                                                                                                                                                          
+                                                                                                                                                                   
+        printf("Enter the starting vertex: ");
+        scanf("%d", &startVertex);
+                                                                                                                                                                   
+        for (int i = 0; i < MAX_VERTICES; i++) {
+                visited[i] = false;
+        }                                                                                                                                                          
+                                                                                                                                                                   
+        printf("Depth-First Search (DFS) starting from vertex %d: ", startVertex);
+        dfs(vertices, startVertex); 
+printf("Done\n");
+        }

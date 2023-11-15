@@ -1,0 +1,112 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct list{
+        int coeff,exp;
+        struct list *nxt;
+};                                                                                                                                                                 
+struct list * insertion(struct list *head,int e,int exp)
+{
+        struct list *newNode=(struct list *)malloc(sizeof(struct list)),*currNode;
+        if(newNode==NULL)
+        {                                                                                                                                                          
+                printf("unsuccessful allocation:\n");
+                exit(1);
+        }                                                                                                                                                          
+        newNode->coeff=e;                                                                                                                                          
+        newNode->exp=exp;                                                                                                                                          
+        if(head==NULL)
+        {                                                                                                                                                          
+                newNode->nxt=NULL;
+                head=newNode;                                                                                                                                      
+                                                                                                                                                                   
+        }                                                                                                                                                          
+        else{
+                currNode=head;                                                                                                                                     
+                newNode->nxt=NULL;
+                while(currNode->nxt!=NULL)
+                        currNode=currNode->nxt;                                                                                                                    
+                currNode->nxt=newNode;                                                                                                                             
+        }                                                                                                                                                          
+        return head;
+}
+                                                                                                                                                                   
+                                                                                                                                                                   
+void main()
+{                                                                                                                                                                  
+        int a,b,c=1,i=1;
+        struct list *s1=NULL,*s2=NULL,*s3=NULL,*c1,*c2,*c3;
+        printf("Polynomial1:\n");
+        while(c==1)
+        {         
+printf("Enter the coefficient of term%d:",i);
+                scanf("%d",&a);
+                printf("Enter the exponent of term%d:",i);
+                scanf("%d",&b);
+                s1=insertion(s1,a,b);                                                                                                                              
+                i++;                                                                                                                                               
+                printf("Enter 1 to continue:");
+                scanf("%d",&c);
+        }                                                                                                                                                          
+        i=1;
+        c=1;
+        printf("Polynomial2:\n");
+        while(c==1)
+        {                                                                                                                                                          
+                printf("Enter the coefficient of term%d:",i);
+                scanf("%d",&a);
+                printf("Enter the exponent of term%d:",i);
+                scanf("%d",&b);
+                s2=insertion(s2,a,b);                                                                                                                              
+                i++;                                                                                                                                               
+                printf("Enter 1 to continue:");
+                scanf("%d",&c);
+        }                                                                                                                                                          
+        c1=s1;                                                                                                                                                     
+        c2=s2;                                                                                                                                                     
+        while(c1!=NULL&&c2!=NULL)
+        {                                                                                                                                                          
+                if(c1->exp==c2->exp)
+                {                                                                                                                                                  
+                        s3=insertion(s3,c1->coeff+c2->coeff,c1->exp);                                                                                              
+                        c1=c1->nxt;                                                                                                                                
+                        c2=c2->nxt;                                                                                                                                
+                }                                                                                                                                                  
+                else if(c1->exp>c2->exp)
+                {                                                                                                                                                  
+                        s3=insertion(s3,c1->coeff,c1->exp);                                                                                                        
+                        c1=c1->nxt;                                                                                                                                
+                }                                                                                                                                                  
+                else
+{                                                                                                                                                  
+                        s3=insertion(s3,c2->coeff,c2->exp);                                                                                                        
+                        c2=c2->nxt;                                                                                                                                
+                }                                                                                                                                                  
+        }                                                                                                                                                          
+        if(c1!=NULL)
+        {                                                                                                                                                          
+                while(c1!=NULL)
+                {                                                                                                                                                  
+                        s3=insertion(s3,c1->coeff,c1->exp);                                                                                                        
+                        c1=c1->nxt;                                                                                                                                
+                }                                                                                                                                                  
+        }                                                                                                                                                          
+        if(c2!=NULL)
+        {                                                                                                                                                          
+                while(c2!=NULL)
+                {                                                                                                                                                  
+                        s3=insertion(s3,c2->coeff,c2->exp);                                                                                                        
+                        c2=c2->nxt;                                                                                                                                
+                }                                                                                                                                                  
+        }                                                                                                                                                          
+        c3=s3;                                                                                                                                                     
+        while(c3->nxt!=NULL)
+        {                                                                                                                                                          
+                                                                                                                                                                   
+                printf("(%d)x^%d+",c3->coeff,c3->exp);
+                c3=c3->nxt;                                                                                                                                        
+        }                                                                                                                                                          
+        if(c3->exp==0)
+                printf("(%d)",c3->coeff);
+        else
+                printf("(%d)x^%d\n",c3->coeff,c3->exp);
+}   

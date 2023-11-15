@@ -1,0 +1,28 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include "week3spot.h"
+#include "week3spot.c"
+void main()
+{                                                                                                                                                                  
+        char str[100];
+        printf("Enter the string to be checked:");
+        gets(str);                                                                                                                                                 
+        struct stack *s1;
+        s1=createstack(s1);                                                                                                                                        
+        for(int i=0;i<strlen(str);i++)
+        {                                                                                                                                                          
+                push(s1,str[i]);                                                                                                                                   
+        }                                                                                                                                                          
+                                                                                                                                                                   
+                                                                                                                                                                   
+        for(int i=0;i<strlen(str);i++)
+        {                                                                                                                                                          
+                if(pop(s1)!=str[i])
+                {                                                                                                                                                  
+                        printf("It is not a palindrome\n");
+                        exit(1);
+                }                                                                                                                                                  
+        }                                                                                                                                                          
+        printf("It is a palindrome\n");
+}                   

@@ -1,0 +1,61 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include "bst.h"
+#include "bst.c"
+#include<math.h>
+void main()
+{                                                                                                                                                                  
+        int a,i=0;
+        struct tree *root=NULL;
+        while(1)
+        {                                                                                                                                                          
+                printf("Enter 1 for insertion,2 for deletion,3 for searching,4 for preorder traversal,5 for inorder traversal,6 for postorder traversal,7 for treed
+isplay,8 for exit:");
+                scanf("%d",&i);
+                switch(i)
+                {                                                                                                                                                  
+                        case 1:
+                                printf("enter the element to insert:");
+                                scanf("%d",&a);
+                                root=insertion(root,a);                                                                                                            
+                                break;
+                        case 2:
+                                printf("enter the element to delete:");
+                                scanf("%d",&a);
+                                root=deletion(root,a);                                                                                                             
+                                break;
+                        case 3:
+                                printf("enter the element to search:");
+                                scanf("%d",&a);
+                                if(search(root,a)==1)
+                                        printf("Element found\n");
+                                else
+                                        printf("Element not found\n");
+                                break;
+                        case 4:
+                                printf("Preorder traversal:");
+                                preorder(root);                                                                                                                    
+                                printf("\n");
+                                break;
+                        case 5:
+printf("Inorder Traversal:");
+                                inorder(root);                                                                                                                     
+                                printf("\n");
+                                break;
+                        case 6:
+                                printf("Postorder traversal:");
+                                postorder(root);                                                                                                                   
+                                printf("\n");
+                                break;
+                        case 7:
+                                printTree(root,0);
+                                printf("\n");
+                                break;
+                        case 8:
+                                exit(1);
+                                                                                                                                                                   
+                                                                                                                                                                   
+                                                                                                                                                                   
+                }                                                                                                                                                  
+        }                                                                                                                                                          
+}          

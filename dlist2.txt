@@ -1,0 +1,158 @@
+struct list{
+        int data;
+        struct list *nxt,*prev;
+};                                                                                                                                                                 
+struct list * insertion(struct list *head,int e)
+{                                                                                                                                                                  
+        struct list *newNode=(struct list *)malloc(sizeof(struct list)),*currNode;
+        if(newNode==NULL)
+        {                                                                                                                                                          
+                printf("unsuccessful allocation:\n");
+                exit(1);
+        }                                                                                                                                                          
+        newNode->data=e;                                                                                                                                           
+        if(head==NULL)
+        {                                                                                                                                                          
+                newNode->nxt=NULL;
+                newNode->prev=NULL;
+                head=newNode;                                                                                                                                      
+                return head;
+        }                                                                                                                                                          
+        printf("Insertion position(0 for beginning,1 for end,2 for insertAfter,3 for insertBefore):");
+        int a,elt,i=0;                                                                                                                                             
+        scanf("%d",&a);                                                                                                                                            
+        switch(a)                                                                                                                                                  
+        {                                                                                                                                                          
+        c1:     case 0:                                                                                                                                            
+                        newNode->nxt=head;                                                                                                                         
+                        newNode->prev=NULL;                                                                                                                        
+                        head->prev=newNode;                                                                                                                        
+                        head=newNode;                                                                                                                              
+                        break;                                                                                                                                     
+                case 1:                                                                                                                                            
+                        currNode=head;                                                                                                                             
+                        newNode->nxt=NULL;                                                                                                                         
+                        while(currNode->nxt!=NULL)                                                                                                                 
+                                currNode=currNode->nxt;                                                                                                            
+                        newNode->prev=currNode;                                                                                                                    
+                        currNode->nxt=newNode;                                                                                                                     
+                        break;
+                case 2:
+printf("enter the previous element:");
+                        scanf("%d",&elt);
+                        currNode=head;                                                                                                                             
+                        while(currNode!=NULL&&currNode->data!=elt)
+                        {                                                                                                                                          
+                                currNode=currNode->nxt;                                                                                                            
+                        }                                                                                                                                          
+                        if(currNode==NULL)
+                        {                                                                                                                                          
+                                printf("element not found\n");
+                                return head;
+                        }                                                                                                                                          
+                        newNode->prev=currNode;                                                                                                                    
+                        newNode->nxt=currNode->nxt;                                                                                                                
+                        if(currNode->nxt==NULL)
+                        {                                                                                                                                          
+                                currNode->nxt=newNode;                                                                                                             
+                                break;
+                        }                                                                                                                                          
+                        else
+                        {                                                                                                                                          
+                                currNode->nxt->prev=newNode;                                                                                                       
+                                currNode->nxt=newNode;                                                                                                             
+                                break;
+                        }                                                                                                                                          
+                case 3:
+                        printf("enter the next element:");
+                        scanf("%d",&elt);
+                        currNode=head;                                                                                                                             
+                        if(currNode->data==elt)
+                                goto c1;
+                        while(currNode!=NULL&&currNode->data!=elt)
+                        {                                                                                                                                          
+                                currNode=currNode->nxt;                                                                                                            
+                        }                                                                                                                                          
+                        if(currNode==NULL)
+                        {                                                                                                                                          
+                                printf("element not found\n");
+                                return head;
+}                                                                                                                                          
+                        currNode->prev->nxt=newNode;                                                                                                               
+                        newNode->nxt=currNode;                                                                                                                     
+                        newNode->prev=currNode->prev;                                                                                                              
+                        currNode->prev=newNode;                                                                                                                    
+                        break;
+                default:
+                        printf("Invalid position:\n");
+        }                                                                                                                                                          
+        return head;
+}                                                                                                                                                                  
+struct list * deletion(struct list *head,int elt)
+{                                                                                                                                                                  
+        if(head==NULL)
+        {                                                                                                                                                          
+                printf("empty list\n");
+                exit(1);
+                return head;
+        }                                                                                                                                                          
+        struct list *currNode;
+        if(head->data==elt&&head->nxt==NULL)
+        {                                                                                                                                                          
+                currNode=head;                                                                                                                                     
+                free(currNode);                                                                                                                                    
+                head=NULL;
+        }                                                                                                                                                          
+        else if(head->data==elt&&head->nxt!=NULL)
+        {                                                                                                                                                          
+                currNode=head;                                                                                                                                     
+                head=currNode->nxt;                                                                                                                                
+                head->prev=NULL;
+                free(currNode);                                                                                                                                    
+        }                                                                                                                                                          
+        else
+        {                                                                                                                                                          
+                currNode=head;                                                                                                                                     
+                while(currNode!=NULL&&currNode->data!=elt)
+                { 
+currNode=currNode->nxt;                                                                                                                    
+                }                                                                                                                                                  
+                if(currNode==NULL)
+                {                                                                                                                                                  
+                        printf("Data is not not present in the list\n");
+                }                                                                                                                                                  
+                else if(currNode->nxt==NULL)
+                {                                                                                                                                                  
+                        currNode->prev->nxt=NULL;
+                        free(currNode);                                                                                                                            
+                }                                                                                                                                                  
+                else
+                {                                                                                                                                                  
+                        currNode->prev->nxt=currNode->nxt;                                                                                                         
+                        currNode->nxt->prev=currNode->prev;                                                                                                        
+                        free(currNode);                                                                                                                            
+                }                                                                                                                                                  
+        }                                                                                                                                                          
+        return head;
+}                                                                                                                                                                  
+void display(struct list *head)
+{
+        struct list *currNode;
+        currNode=head;                                                                                                                                             
+        while(currNode!=NULL)
+        {                                                                                                                                                          
+                printf("\t%d\n",currNode->data);
+                currNode=currNode->nxt;                                                                                                                            
+        }                                                                                                                                                          
+}
+void size(struct list *head)
+{                                                                                                                                                                  
+        int a=0;
+        struct list *currNode=head;
+        while(currNode!=NULL)
+        {                                                                                                                                                          
+                a++;                                                                                                                                               
+                currNode=currNode->nxt;                                                                                                                            
+        } 
+printf("\tsize:%d\n",a);
+}

@@ -1,0 +1,5 @@
+struct list *head;
+struct list * insertion(struct list *head,int e);
+struct list * deletion(struct list *head,int elt);
+void display(struct list *head);
+void size(struct list *head);

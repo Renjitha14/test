@@ -1,0 +1,74 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct tree{
+        int data;
+        struct tree *lc,*rc;
+};                                                                                                                                                                 
+void inord(struct tree *r);
+struct tree *createNode(struct tree *r,int data);
+struct tree *Tree(struct tree *r,int *inarr,int *prearr,int n);
+void main()
+{
+        struct tree *root=NULL;
+        int inorder[100],preorder[100];
+        int i=0,c=1;
+        while(c!=0)
+        {
+                printf("enter elements for inorder:");
+                scanf("%d",&inorder[i++]);                                                                                                                         
+                printf("enter 0 to quit:");
+                scanf("%d",&c);
+        }
+        c=1;
+        i=0;
+        while(c!=0)
+        {
+                printf("enter elements for preorder:");
+                scanf("%d",&preorder[i++]);
+                printf("enter 0 to quit:");
+                scanf("%d",&c);
+        }
+        root=Tree(root,inorder,preorder,i);                                                                                                                        
+        inord(root);                                                                                                                                               
+                                                                                                                                                                   
+}
+struct tree *createNode(struct tree *r,int data)
+{
+        r=(struct tree *)malloc(sizeof(struct tree));
+        r->data=data;                                                                                                                                              
+        r->lc=r->rc=NULL;
+}
+struct tree *Tree(struct tree *r,int *inarr,int *prearr,int n)
+{
+        r=createNode(r,prearr[0]);
+        int i=0,j=0,k;
+        while(inarr[i]!=prearr[0])
+                i++;                                                                                                                                               
+        k=i;                                                                                                                                                       
+        int arr1[i],arr2[n-i];
+        i=0;
+        while(inarr[i]!=prearr[0])
+        {
+                arr1[i]=inarr[i];                                                                                                                                  
+                i++;                                                                                                                                               
+        }
+        i+=1,j=0;
+        while(i!=n)
+        {
+                arr2[j++]=inarr[i++];                                                                                                                              
+        }
+                                                                                                                                                                   
+                                                                                                                                                                   
+        r->lc=Tree(r->lc,arr1,&prearr[1],k);
+        r->rc=Tree(r->rc,arr2,&prearr[1],n-k);
+        return r;
+}
+void inord(struct tree *r)
+{
+        if(r!=NULL)
+        {
+                inord(r->lc);                                                                                                                                      
+                printf("%d ",r->data);
+                inord(r->rc);                                                                                                                                      
+        }
+}

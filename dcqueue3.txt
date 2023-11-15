@@ -1,0 +1,41 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include "dcqueue.h"
+#include "dcqueue.c"
+void main()
+{                                                                                                                                                                  
+        int c,x;
+        struct queue *q;
+        q=createqueue(q);                                                                                                                                          
+        while(1)
+        {                                                                                                                                                          
+                printf("enter 1 for enqueue, 2 for dequeue,3 for peep,4 to check whether the queue is empty,5 to display,6 to quit:");
+                scanf("%d",&c);
+                switch(c)
+                {                                                                                                                                                  
+                        case 1:
+                                printf("enter the element to insert:");
+                                scanf("%d",&x);
+                                enqueue(q,x);                                                                                                                      
+                                break;
+                        case 2:
+                                x=dequeue(q);                                                                                                                      
+                                printf("Removed element:%d\n",x);
+                                break;
+                        case 3:
+                                printf("Element at the front:%d\n",peep(q));
+                                break;
+                        case 4:
+                                if(isEmpty(q))
+                                        printf("Queue is empty\n");
+                                else
+                                        printf("Queue is not empty\n");
+                                break;
+                        case 5:
+                                display(q);                                                                                                                        
+                                break;
+                        case 6:
+                                exit(1);
+                }                                                                                                                                                  
+        } 
+}                             

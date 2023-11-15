@@ -1,0 +1,7 @@
+struct stack * createstack(struct stack *s);
+void push(struct stack *s,char a);
+char pop(struct stack *s);
+char peek(struct stack *s);
+int isFull(struct stack *s);
+int isEmpty(struct stack *s);
+void display(struct stack *s);

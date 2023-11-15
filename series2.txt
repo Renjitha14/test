@@ -1,0 +1,13 @@
+#include<stdio.h>
+#include "series.h"
+#include "series.c"
+int main()
+{                                                                                                                                                                  
+        int n,a[20];
+        printf("Enter the number of elements:");
+        scanf("%d",&n);
+        printf("Sum:%d\n",series(a,n));
+        display(a,n);                                                                                                                                              
+        return 0;
+}                                                                                                                                                                  
+~

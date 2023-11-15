@@ -1,0 +1,53 @@
+
+ 
+#include <stdio.h>
+#include <stdlib.h>
+#include "stack.h"
+#include "stack.c"
+void main()
+{                                                                                                                                                                  
+        int n,c=0,i;
+        printf("Enter the size of the stack:");
+        scanf("%d",&n);
+        struct stack *s,a;
+        s=&a;                                                                                                                                                      
+        s=createstack(s,n);                                                                                                                                        
+        while(c!=6)
+        {                                                                                                                                                          
+                printf("Enter 1 for push,2 for pop,3 for peek,4 to check whether the stack is full,5 to check whether the stack is empty,6 to quit:");
+                scanf("%d",&c);
+                switch(c)
+                {                                                                                                                                                  
+                        case 1:
+                                printf("enter element to push:");
+                                scanf("%d",&i);
+                                push(s,i);                                                                                                                         
+                                printf("Push operation:\n");
+                                display(s);                                                                                                                        
+                                break;
+                        case 2:
+                                printf("pop operation:\n");
+                                pop(s);                                                                                                                            
+                                display(s);                                                                                                                        
+                                break;
+                        case 3:
+                                printf("peek operation: %d\n",peek(s));
+                                break;
+                        case 4:
+                                if(isFull(s))
+                                        printf("stack is full\n");
+                                else
+                                        printf("stack is not full\n");
+                                break;
+                        case 5:
+if(isEmpty(s))
+                                        printf("stack is empty\n");
+                                else
+                                        printf("stack is not empty\n");
+                                                                                                                                                                   
+                                break;
+                        case 6:
+                                exit(1);
+                }                                                                                                                                                  
+        }                                                                                                                                                          
+}     

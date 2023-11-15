@@ -1,0 +1,25 @@
+struct employee
+{                                                                                                                                                                  
+        int empid;
+        char name[50];
+        int work_hrs;
+        float per_hr_income,pay;
+};                                                                                                                                                                 
+void get_data(struct employee *e)
+{                                                                                                                                                                  
+        printf("Enter employee id: ");
+        scanf("%d",&e->empid);
+        printf("\nEnter employee name:");
+        scanf("%s",&e->name);
+        printf("\nEnter working hours:");
+        scanf("%d",&e->work_hrs);
+        printf("\nEnter per_hr_income:");
+        scanf("%f",&e->per_hr_income);
+}                                                                                                                                                                  
+void display_data(struct employee *e)
+{                                                                                                                                                                  
+        float tax_rate=0.02,tax_amt;
+        tax_amt=(e->work_hrs)*(e->per_hr_income)*tax_rate;                                                                                                         
+        e->pay=(e->work_hrs)*(e->per_hr_income)-tax_amt;                                                                                                           
+        printf("\nEmployee id:%d \n Employee name:%s \n Payroll:%f \n\n",e->empid,e->name,e->pay);
+}   

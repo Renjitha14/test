@@ -1,0 +1,3 @@
+struct employee *e;
+void get_data(struct employee *e);
+void display_data(struct employee *e);

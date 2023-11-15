@@ -1,0 +1,82 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include "preintree.h"
+#include "preintree.c"
+#include<math.h>
+void main()
+{                                                                                                                                                                  
+        int ele,h,i=0,j,k,m,l;
+        struct tree *root=NULL;
+        printf("Menu:\n1-insertion\n2-deletion\n3-search\n4-preorder\n5-inorder\n6-postorder\n7-treedisplay\n8-exit\n");
+                                                                                                                                                                   
+        while(1)
+        {                                                                                                                                                          
+                printf("Enter your choice:");
+                scanf("%d",&i);
+                switch(i)
+                {                                                                                                                                                  
+                        case 1:
+                                printf("enter the element to insert:");
+                                scanf("%d",&ele);
+                                root=insertion(root,ele);                                                                                                          
+                                a=0;
+                                h=levelorder(root);                                                                                                                
+                                break;
+                        case 2:
+                                printf("enter the element to delete:");
+                                scanf("%d",&ele);
+                                root=deletion(root,ele);                                                                                                           
+                                a=0;
+                                h=levelorder(root);                                                                                                                
+                                break;
+                        case 3:
+                                printf("enter the element to search:");
+                                scanf("%d",&ele);
+                                if(search(root,ele)==1)
+                                        printf("Element found\n");
+                                else
+                                        printf("Element not found\n");
+                                break;
+                        case 4:
+printf("Preorder traversal:");
+                                preorder(root);                                                                                                                    
+                                printf("\n");
+                                break;
+                        case 5:
+                                printf("Inorder Traversal:");
+                                inorder(root);                                                                                                                     
+                                printf("\n");
+                                break;
+                        case 6:
+                                printf("Postorder traversal:");
+                                postorder(root);                                                                                                                   
+                                printf("\n");
+                                break;
+                        case 7:
+                                a=0;
+                                h=levelorder(root);                                                                                                                
+                                m=h;                                                                                                                               
+                                for(l=1;l<=h;l++)
+                                {                                                                                                                                  
+                                        for(j=power(l-1);j<=power(l)-1;j++){
+                                        if(j==power(l-1)){
+                                                for(k=power(m);k>=1;k--)
+                                                        printf(" ");
+                                        }                                                                                                                          
+                                        if(arr[j-1]==0)
+                                                printf(" ");
+                                        else
+                                                printf("%d",arr[j-1]);
+                                        for(k=power(m+1);k>=1;k--)
+                                                printf(" ");
+                                        }                                                                                                                          
+                                        m-=1;
+                                        printf("\n");
+                                }                                                                                                                                  
+                                break;
+                                                                                                                                                                   
+                        case 8:
+                                exit(1);
+}
+}
+}

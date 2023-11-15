@@ -1,0 +1,63 @@
+struct stack1 {
+        int *data,top,size;
+};                                                                                                                                                                 
+int isFull1(struct stack1* s);
+int isEmpty1(struct stack1* s);
+struct stack1 * createstack1(struct stack1 *s)
+{                                                                                                                                                                  
+        s=(struct stack1 *)malloc(sizeof(struct stack1));
+        if(s==NULL)
+        {                                                                                                                                                          
+                printf("Unsuccessful allocation");
+                exit(1);
+        }                                                                                                                                                          
+                                                                                                                                                                   
+        s->data=(int *)malloc(sizeof(int)*1);
+        if(s->data==NULL)
+        {                                                                                                                                                          
+                printf("Unsuccessful allocation");
+                exit(1);
+        }                                                                                                                                                          
+        s->top=-1;
+        s->size=1;
+        return s;
+}                                                                                                                                                                  
+void push1(struct stack1 *s,int a)
+{                                                                                                                                                                  
+        if(isFull1(s))
+        {                                                                                                                                                          
+                realloc(s->data,2*s->size*sizeof(int));
+        }                                                                                                                                                          
+        s->data[++(s->top)]=a;                                                                                                                                     
+}                                                                                                                                                                  
+int pop1(struct stack1 *s)
+{                                                                                                                                                                  
+        if(isEmpty1(s))
+        {                                                                                                                                                          
+                printf("stack underflow");
+                exit(1);
+        }                                                                                                                                                          
+        int rm= s->data[(s->top)--];
+ return rm;
+}
+int peek1(struct stack1 *s)
+{
+        return s->data[s->top];
+}
+int isFull1(struct stack1 *s)
+{
+        if(s->top==s->size-1)
+                return 1;
+        return 0;
+}
+int isEmpty1(struct stack1 *s)
+{
+        if(s->top==-1)
+                return 1;
+        return 0;
+}
+void display1(struct stack1 *s)
+{
+        for(int i=s->top;i>=0;i--)
+                printf("\t%d\n",s->data[i]);
+}

@@ -1,0 +1,65 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+void substr(char *a,char *b,int i)
+{
+                                                                                                                                                                   
+        for(int index=0,k=i;a[k]!='\0';index++,k++)
+        {                                                                                                                                                          
+                b[index]=a[k];                                                                                                                                     
+                                                                                                                                                                   
+        }                                                                                                                                                          
+                                                                                                                                                                   
+}
+void main()
+{
+        int i=0;
+        char *str1=NULL,*str2=NULL,buffer[5];
+        str1=(char *)malloc(200*sizeof(char));
+        if(str1==NULL)
+                printf("Pointer assignment is unsuccessful\n");
+        printf("enter the string:");
+        while(1)
+        {                                                                                                                                                          
+                scanf("%c",&str1[i]);
+                if(str1[i]=='\n')
+                        break;
+                i++;                                                                                                                                               
+                                                                                                                                                                   
+                                                                                                                                                                   
+                                                                                                                                                                   
+                                                                                                                                                                   
+                                                                                                                                                                   
+        }                                                                                                                                                          
+                                                                                                                                                                   
+        int ind;
+        printf("enter the index from which the string is to be copied:");
+        scanf("%d",&ind);
+        str2=(char *)malloc((strlen(str1)+1-ind)*sizeof(char));
+        if(str2==NULL)
+                printf("Pointer assignment is unsuccessful\n");
+printf("enter the string:");
+        while(1)
+        {                                                                                                                                                          
+                scanf("%c",&str1[i]);
+                if(str1[i]=='\n')
+                        break;
+                i++;                                                                                                                                               
+                                                                                                                                                                   
+                                                                                                                                                                   
+                                                                                                                                                                   
+                                                                                                                                                                   
+                                                                                                                                                                   
+        }                                                                                                                                                          
+                                                                                                                                                                   
+        int ind;
+        printf("enter the index from which the string is to be copied:");
+        scanf("%d",&ind);
+        str2=(char *)malloc((strlen(str1)+1-ind)*sizeof(char));
+        if(str2==NULL)
+                printf("Pointer assignment is unsuccessful\n");
+        substr(str1,str2,ind);                                                                                                                                     
+        printf("Copied string:%s\n",str2);
+        free(str1);                                                                                                                                                
+        free(str2);                                                                                                                                                
+}

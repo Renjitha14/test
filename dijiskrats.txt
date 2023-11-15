@@ -1,0 +1,76 @@
+#include <stdio.h>
+#include <limits.h>
+#define V 100
+int ans[100];
+int a=0;
+int minDistance(int dist[], int sptSet[],int n) {
+        int min = INT_MAX, min_index;
+        for (int v = 0; v < n; v++) {
+                if (!sptSet[v] && dist[v] < min) {
+                        min = dist[v];                                                                                                                             
+                        min_index = v;                                                                                                                             
+                }                                                                                                                                                  
+        }                                                                                                                                                          
+        return min_index;
+}                                                                                                                                                                  
+void printSolution(int dist[],int src,int dest,int n) {
+        for (int i = 0; i < n; i++) {
+                if(i==dest)
+                        printf("%d-%d:%d\n",src,dest,dist[i]);
+        }                                                                                                                                                          
+                                                                                                                                                                   
+                                                                                                                                                                   
+}                                                                                                                                                                  
+void printpath(int parent[],int src,int dest)
+{                                                                                                                                                                  
+        if(dest==src)
+        {                                                                                                                                                          
+                ans[a++]=dest;                                                                                                                                     
+                return ;
+        }                                                                                                                                                          
+        ans[a++]=dest;                                                                                                                                             
+        printpath(parent,src,parent[dest]);                                                                                                                        
+}                                                                                                                                                                  
+void dijkstra(int graph[V][V], int src, int dest,int n) {
+        int dist[n],parent[n];
+        int sptSet[n];
+        for (int i = 0; i < n; i++) {
+                dist[i] = INT_MAX;
+                sptSet[i] = 0;
+        }  
+dist[src] = 0;
+        for (int count = 0; count < n - 1; count++) {
+                int u = minDistance(dist, sptSet,n);
+                sptSet[u] = 1;
+                for (int v = 0; v < n; v++) {
+                        if (!sptSet[v] && graph[u][v] && dist[u] != INT_MAX && dist[u] + graph[u][v] < dist[v]) {
+                                dist[v] = dist[u] + graph[u][v];                                                                                                   
+                                parent[v]=u;                                                                                                                       
+                        }                                                                                                                                          
+                }                                                                                                                                                  
+        }                                                                                                                                                          
+        printSolution(dist,src,dest,n);                                                                                                                            
+        printpath(parent,src,dest);                                                                                                                                
+        for(int i=a-1;i>=0;i--)
+                printf("%d->",ans[i]);
+        printf("done\n");
+}
+int main() {
+        int n;
+        printf("Enter the no of vertices:");
+        scanf("%d",&n);
+        int graph[V][V];
+        int src,dest;
+        printf("Enter the adjacency matrix:\n");
+        for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
+                        scanf("%d", &graph[i][j]);
+                }                                                                                                                                                  
+        }                                                                                                                                                          
+        printf("Enter the source:");
+        scanf("%d", &src);
+        printf("Enter the destination:");
+        scanf("%d",&dest);
+        dijkstra(graph, src, dest,n);                                                                                                                              
+        return 0;
+}        

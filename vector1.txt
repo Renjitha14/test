@@ -1,0 +1,10 @@
+struct Vector {
+            int* data;
+            int size;
+};                                                                                                                                                                 
+                                                                                                                                                                   
+struct Vector* createVector(int initialSize);
+void pushBack(struct Vector* vec, int element);
+int getElement(const struct Vector* vec, int index);
+int getSize(const struct Vector* vec);
+void destroyVector(struct Vector* vec);
